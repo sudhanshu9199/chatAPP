@@ -1,7 +1,7 @@
 
 # 🔐 Authentication Backend API
 
-This is a basic **User Authentication API** built with **Node.js**, **Express**, and **MongoDB**. It includes user registration, login, and logout functionalities using **JWT-based authentication**, **secure password hashing**, and **cookie-based session management**.
+This is a basic **User Authentication API** built with **Node.js**, **Express**, and **MongoDB**. It includes user registration, login, and logout functionalities, and now supports **profile picture updates** and **authentication check** using **Cloudinary** and **JWT-based authentication**, **secure password hashing**, and **cookie-based session management**.
 
 ---
 
@@ -16,8 +16,11 @@ backend/
 │   │   └── user.models.js
 │   ├── routes/
 │   │   └── auth.routes.js
+│   ├── middleware/
+│   │   └── auth.middleware.js
 │   ├── lib/
 │   │   └── utils.js
+│   │   └── cloudinary.js
 │   ├── config/
 │   │   └── db.js
 │   └── index.js
@@ -39,9 +42,10 @@ backend/
   - `httpOnly: true` – blocks JS access (XSS protection)
   - `sameSite: strict` – prevents CSRF
   - `secure: true/false` – based on environment
+- 🧾 Middleware to protect private routes (check token validity)
+- 🧠 Authentication check via `/check` endpoint
+- 🖼️ Profile picture update with Cloudinary integration
 - 🌫️ Modular structure for easy scalability
-
-- ☁️ Cloudinary integration (optional for profile pics)
 - 🌐 Socket.IO support (for real-time features, if any)
 
 ---
@@ -65,7 +69,7 @@ backend/
 - bcryptjs for password security
 - jsonwebtoken for authentication
 - cookie-parser for cookies
-- cloudinary (optional)
+- cloudinary for media hosting
 - socket.io (future integration)
 
 ---
@@ -83,6 +87,9 @@ Create a `.env` file with:
 PORT=4003
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_secret_key
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 NODE_ENV=development
 ```
 
@@ -90,11 +97,13 @@ NODE_ENV=development
 
 ## 🔗 API Endpoints
 
-| Method | Route     | Description         |
-|--------|-----------|---------------------|
-| POST   | /signup   | Register a new user |
-| POST   | /login    | Authenticate a user |
-| POST   | /logout   | Clear auth session  |
+| Method | Route             | Description                        |
+|--------|-------------------|------------------------------------|
+| POST   | /signup           | Register a new user                |
+| POST   | /login            | Authenticate a user                |
+| POST   | /logout           | Clear auth session                 |
+| GET    | /check            | Check if user is authenticated     |
+| PUT    | /update-profile   | Update user profile picture        |
 
 ---
 
