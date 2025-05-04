@@ -1,7 +1,7 @@
 
 # 🔐 Authentication Backend API
 
-This is a basic **User Authentication API** built with **Node.js**, **Express**, and **MongoDB**. It includes user registration, login, and logout functionalities, and now supports **profile picture updates** and **authentication check** using **Cloudinary** and **JWT-based authentication**, **secure password hashing**, and **cookie-based session management**.
+This is a basic **User Authentication API** built with **Node.js**, **Express**, and **MongoDB**. It includes user registration, login, and logout functionalities, and now supports **profile picture updates** and **authentication check** using **Cloudinary** for media uploads. It enables sending/receiving text and image messages between authenticated users, and **JWT-based authentication**, **secure password hashing**, and **cookie-based session management**.
 
 ---
 
@@ -12,16 +12,18 @@ backend/
 ├── src/
 │   ├── controllers/
 │   │   └── auth.controllers.js
+│   └── message.controllers.js
 │   ├── models/
 │   │   └── user.models.js
+│   └── message.models.js
 │   ├── routes/
 │   │   └── auth.routes.js
+│   └── message.routes.js
 │   ├── middleware/
 │   │   └── auth.middleware.js
 │   ├── lib/
 │   │   └── utils.js
 │   │   └── cloudinary.js
-│   ├── config/
 │   │   └── db.js
 │   └── index.js
 ├── .env
@@ -44,9 +46,15 @@ backend/
   - `secure: true/false` – based on environment
 - 🧾 Middleware to protect private routes (check token validity)
 - 🧠 Authentication check via `/check` endpoint
-- 🖼️ Profile picture update with Cloudinary integration
 - 🌫️ Modular structure for easy scalability
 - 🌐 Socket.IO support (for real-time features, if any)
+- 🔒 Protected routes for authenticated users
+- 🧑‍🤝‍🧑 Fetch user list (except self) for sidebar display
+- 💬 Send text and image messages
+- 📥 Retrieve messages between two users
+- ☁️ Upload and store image messages with **Cloudinary**
+- 🖼️ Profile picture update with Cloudinary integration
+- ⏱️ Message timestamps using Mongoose's schema options
 
 ---
 
@@ -69,7 +77,7 @@ backend/
 - bcryptjs for password security
 - jsonwebtoken for authentication
 - cookie-parser for cookies
-- cloudinary for media hosting
+- cloudinary for media hosting (image upload)
 - socket.io (future integration)
 
 ---
@@ -104,6 +112,18 @@ NODE_ENV=development
 | POST   | /logout           | Clear auth session                 |
 | GET    | /check            | Check if user is authenticated     |
 | PUT    | /update-profile   | Update user profile picture        |
+
+---
+
+## 🔗 Message API Endpoints
+
+| Method | Route                  | Description                              |
+|--------|------------------------|------------------------------------------|
+| GET    | /api/message/users     | Get all users (excluding current user)   |
+| GET    | /api/message/:id       | Get all messages between 2 users         |
+| POST   | /api/message/send/:id  | Send a message (text/image)              |
+
+> 🔐 All routes require JWT auth middleware `protectRoute`
 
 ---
 
