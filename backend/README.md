@@ -58,6 +58,23 @@ backend/
 
 ---
 
+## 🔄 CORS Configuration
+
+To allow requests from your frontend running on a different port (like Vite on `5173`), CORS is configured in `index.js`:
+
+```js
+import cors from "cors";
+
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        credentials: true,
+    })
+);
+```
+
+---
+
 ## ⚙️ Signup Validations
 
 - ❌ Returns error if **any field is missing**
