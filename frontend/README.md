@@ -1,4 +1,13 @@
 # React + Vite
+
+---
+
+# MitraMilap 🗨️
+
+A modern and elegant real-time messaging web application built with React, Lucide-React, and Tailwind CSS. MitraMilap provides seamless authentication, protected routes, dynamic UI components, and responsive layout design.
+
+---
+
 # Frontend 🧑‍💻🚀
 
 This is the frontend of a modern React-based web application with routing, authentication, and a sleek UI powered by Tailwind CSS and DaisyUI. This project serves as the client-side interface of a full-stack application.
@@ -49,11 +58,23 @@ Authentication is handled using **Zustand** and Axios to interact with a backend
 - Axios instance is preconfigured with `baseURL: http://localhost:3000/api` and `withCredentials: true` for cookie-based sessions.
 
 ---
+
+## 📁 Components Overview
+
+- `AuthImagePattern.jsx`: Animated grid design with title/subtitle.
+- `Navbar.jsx`: Dynamic nav items with Lucide icons.
+- `LoginPage.jsx`: Form with validation, password toggle, toast, loader.
+- `SignUpPage.jsx`: Validates full name, email, password.
+
+---
+
 ## ⚙️ Scripts
 
 To run the app:
 
 ```bash
+git clone https://github.com/sudhanshu9199/mitramilap.git
+cd mitramilap
 npm install
 npm run dev
 ```
@@ -63,14 +84,13 @@ npm run dev
 ## 🚦 Routing
 
 The app uses React Router to manage navigation:
-
-| Path         | Component        |
-|--------------|------------------|
-| `/`          | HomePage         |
-| `/signup`    | SignUpPage       |
-| `/login`     | LoginPage        |
-| `/settings`  | SettingsPage     |
-| `/profile`   | ProfilePage      |
+| Path        | Component        | Access Condition   |
+|-------------|------------------|--------------------|
+| `/`         | HomePage         | Authenticated only |
+| `/login`    | LoginPage        | Guest only         |
+| `/signup`   | SignUpPage       | Guest only         |
+| `/settings` | SettingsPage     | Public             |
+| `/profile`  | ProfilePage      | Authenticated only |
 
 ---
 
@@ -85,7 +105,8 @@ The app uses React Router to manage navigation:
   "react-hot-toast": "^2.5.2",
   "react-router-dom": "^7.5.3",
   "tailwindcss": "^4.1.5",
-  "zustand": "^5.0.4"
+  "zustand": "^5.0.4",
+  "lucide-react": "^0.507.0",
 },
 "devDependencies": {
   "@eslint/js": "^9.22.0",
@@ -102,25 +123,44 @@ The app uses React Router to manage navigation:
 ---
 
 ## ✨ Future Enhancements
+## 🔧 Features Added
 
-- Responsive Navbar UI
-- Protected Routes based on auth state
-- Full authentication forms with validation
-- Better page designs
+### ✅ UI and UX
+- Integrated **Lucide React Icons** for elegant UI components (`MessageSquare`, `User`, `Mail`, `Lock`, `Eye`, `EyeOff`, `Loader2`, etc.)
+- Beautiful **login and sign-up pages** using `AuthImagePattern` with animated placeholders and modern grid layout.
+- Fully responsive `Navbar` with conditional rendering for authenticated users.
+- Stylish forms with icons and togglable password visibility.
+
+### 🔐 Authentication & Routing
+- Uses `useAuthStore` for managing login, signup, and logout.
+- Protected routes:
+  - `/` redirects based on `authUser` status.
+  - `/login` and `/signup` blocked for logged-in users.
+  - `/profile`, `/settings` are protected.
+- Toast notifications for user actions (errors, login feedback, etc.).
+
+### 🔄 Global UI Components
+- `Toaster` from `react-hot-toast` added globally for feedback and alerts.
+- Loader animations while login/signup actions are processing.
+
 
 ---
 
 ## 🤝 Contributing
 
-Feel free to fork this repo and enhance features, fix bugs, or improve the UI.
+PRs are welcome! Feel free to fork this repo and enhance features, fix bugs, or improve the UI. please open an issue first to discuss what you’d like to change.
 
 ---
 
 ## 🧑‍💻 Author
 
-Made with ❤️ by **Sudhanshu Ghosh**
+Made with ❤️ by **Sudhanshu Ghosh** — [GitHub](https://github.com/sudhanshu9199)
 
+---
 
+## 📄 License
+
+This project is open-source and available under the MIT License.
 
 
 
