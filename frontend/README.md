@@ -10,7 +10,7 @@ A modern and elegant real-time messaging web application built with React, Lucid
 
 # Frontend 🧑‍💻🚀
 
-This is the frontend of a modern React-based web application with routing, authentication, and a sleek UI powered by Tailwind CSS and DaisyUI. This project serves as the client-side interface of a full-stack application.
+This is the frontend of a modern React-based web application with routing, Toast notifications and loading indicators, authentication, and a sleek UI powered by Tailwind CSS and DaisyUI. This project serves as the client-side interface of a full-stack application.
 
 ---
 
@@ -20,6 +20,7 @@ This is the frontend of a modern React-based web application with routing, authe
 - **React Router DOM v7**
 - **Tailwind CSS v4**
 - **DaisyUI**
+- **Lucide React Icons**
 - **Axios**
 - **Zustand (State Management)**
 - **Vite (Bundler)**
@@ -57,6 +58,11 @@ Authentication is handled using **Zustand** and Axios to interact with a backend
 - `checkAuth()` is triggered on app load to verify user session.
 - Axios instance is preconfigured with `baseURL: http://localhost:3000/api` and `withCredentials: true` for cookie-based sessions.
 
+## Profile updates are handled with:
+```js
+await updateProfile({ profilePic: base64Image });
+```
+# and are followed by toast notifications and UI updates.
 ---
 
 ## 📁 Components Overview
@@ -65,6 +71,7 @@ Authentication is handled using **Zustand** and Axios to interact with a backend
 - `Navbar.jsx`: Dynamic nav items with Lucide icons.
 - `LoginPage.jsx`: Form with validation, password toggle, toast, loader.
 - `SignUpPage.jsx`: Validates full name, email, password.
+- `ProfilePage.jsx`: Avatar upload, profile details, and account info section
 
 ---
 
@@ -137,6 +144,7 @@ The app uses React Router to manage navigation:
   - `/` redirects based on `authUser` status.
   - `/login` and `/signup` blocked for logged-in users.
   - `/profile`, `/settings` are protected.
+- Profile image upload using FileReader and base64
 - Toast notifications for user actions (errors, login feedback, etc.).
 
 ### 🔄 Global UI Components

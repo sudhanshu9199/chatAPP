@@ -11,7 +11,7 @@ const app = express();
 dotenv.config();
 const port = process.env.PORT || 4003; // Set the port to the environment variable PORT or 4003
 
-app.use(express.json());
+app.use(express.json({ extended: true, limit: '10mb'}));
 app.use(cookieParser());
 app.use(
     cors({

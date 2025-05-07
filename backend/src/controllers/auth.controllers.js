@@ -89,7 +89,7 @@ export const logout = (req, res) => {
 export const updateProfile = async(req, res) => {
   try {
     const {profilePic} = req.body;
-    const userId = req.user._id
+    const userId = req.user._id;
 
     if(!profilePic) {
       res.status(400).json({ message: "Profile pic is required." });
@@ -99,6 +99,7 @@ export const updateProfile = async(req, res) => {
     res.status(200).json(updatedUser)
   } catch (error) {
     console.log("error in update profile: ", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
