@@ -4,13 +4,14 @@
 
 # MitraMilap 🗨️
 
-A modern and elegant real-time messaging web application built with React, Lucide-React, and Tailwind CSS. MitraMilap provides seamless authentication, protected routes, dynamic UI components, and responsive layout design.
+A modern and elegant real-time messaging web application built with React, Lucide-React, and Tailwind CSS. MitraMilap provides seamless authentication, protected routes, dynamic UI components, responsive layout design, and customizable themes
 
 ---
 
 # Frontend 🧑‍💻🚀
 
 This is the frontend of a modern React-based web application with routing, Toast notifications and loading indicators, authentication, and a sleek UI powered by Tailwind CSS and DaisyUI. This project serves as the client-side interface of a full-stack application.
+- Dynamic theming with persistent user preferences.
 
 ---
 
@@ -42,6 +43,9 @@ frontend/
 │   │   └── signUpPage.jsx
 │   ├── store/
 │   │   └── useAuthStore.js
+│   │   └── useThemeStore.js
+│   ├── constants/
+│   │   └── index.js
 │   ├── App.jsx
 │   ├── main.jsx
 │   ├── index.css
@@ -65,6 +69,27 @@ await updateProfile({ profilePic: base64Image });
 # and are followed by toast notifications and UI updates.
 ---
 
+## 🎨 Theme Management
+
+- Users can personalize their chat interface by selecting from a variety of themes.
+  - Themes are defined in **constants/index.js**:
+    ```javascript
+    export const THEMES = [ "light", "dark", "cupcake", ... ];
+    ```
+  - The selected theme is persisted using **localStorage**:
+    ```javascript
+        export const useThemeStore = create((set) => ({
+      theme: localStorage.getItem("chat-theme") || "coffee",
+      setTheme: (theme) => {
+        localStorage.setItem("chat-theme", theme);
+        set({ theme });
+      },
+    }));
+    ```
+  - The **SettingsPage.jsx** provides a UI for theme selection and preview.
+
+---
+
 ## 📁 Components Overview
 
 - `AuthImagePattern.jsx`: Animated grid design with title/subtitle.
@@ -72,6 +97,7 @@ await updateProfile({ profilePic: base64Image });
 - `LoginPage.jsx`: Form with validation, password toggle, toast, loader.
 - `SignUpPage.jsx`: Validates full name, email, password.
 - `ProfilePage.jsx`: Avatar upload, profile details, and account info section
+- `SettingsPage.jsx`: Theme selection with live preview and chat interface simulation.
 
 ---
 
@@ -146,6 +172,11 @@ The app uses React Router to manage navigation:
   - `/profile`, `/settings` are protected.
 - Profile image upload using FileReader and base64
 - Toast notifications for user actions (errors, login feedback, etc.).
+
+### 🎨 Theme Customization
+- Users can select from a variety of themes defined in **constants/index.js**.
+- Selected theme is persisted using **localStorage**.
+- Live preview of selected theme in **SettingsPage.jsx**.
 
 ### 🔄 Global UI Components
 - `Toaster` from `react-hot-toast` added globally for feedback and alerts.
