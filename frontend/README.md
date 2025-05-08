@@ -11,7 +11,10 @@ A modern and elegant real-time messaging web application built with React, Lucid
 # Frontend 🧑‍💻🚀
 
 This is the frontend of a modern React-based web application with routing, Toast notifications and loading indicators, authentication, and a sleek UI powered by Tailwind CSS and DaisyUI. This project serves as the client-side interface of a full-stack application.
+
 - Dynamic theming with persistent user preferences.
+- Real-time chat support using Zustand store.
+- Clean state-based UI rendering: ChatContainer / NoChatSelected.
 
 ---
 
@@ -35,6 +38,12 @@ frontend/
 ├── src/
 │   ├── components/
 │   │   └── Navbar.jsx
+│   │   ├── AuthImagePattern.jsx
+│   │   ├── ChatContainer.jsx
+│   │   ├── NoChatSelected.jsx
+│   │   ├── Sidebar.jsx
+│   │   └── skeletons/
+│   │       └── SidebarSkeleton.jsx
 │   ├── pages/
 │   │   ├── HomePage.jsx
 │   │   ├── LoginPage.jsx
@@ -67,6 +76,19 @@ Authentication is handled using **Zustand** and Axios to interact with a backend
 await updateProfile({ profilePic: base64Image });
 ```
 # and are followed by toast notifications and UI updates.
+
+- `useChatStore` handles chat user list, messages, selected user.
+- `useAuthStore` manages logged-in state and online user tracking.
+
+```js
+// Example ChatStore functions
+getUsers();
+getMessages(userId);
+setSelectedUser(user);
+```
+
+- Online users are indicated with green status dot in sidebar.
+
 ---
 
 ## 🎨 Theme Management
@@ -163,6 +185,10 @@ The app uses React Router to manage navigation:
 - Beautiful **login and sign-up pages** using `AuthImagePattern` with animated placeholders and modern grid layout.
 - Fully responsive `Navbar` with conditional rendering for authenticated users.
 - Stylish forms with icons and togglable password visibility.
+- Sidebar with animated skeletons while loading users.
+- ChatContainer and NoChatSelected render conditionally.
+- Fully responsive layout.
+
 
 ### 🔐 Authentication & Routing
 - Uses `useAuthStore` for managing login, signup, and logout.
