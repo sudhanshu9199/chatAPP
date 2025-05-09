@@ -1,3 +1,5 @@
+import path from "path";
+import { fileURLToPath } from 'url';
 import express from 'express';
 import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.routes.js";
@@ -7,12 +9,12 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { app, server } from './lib/socket.js';
 
-import path from "path";
 
 
 dotenv.config();
 const port = process.env.PORT; // Set the port to the environment variable PORT or 4003
-const_dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(__filename);
 
 app.use(express.json({ extended: true, limit: '10mb'}));
 app.use(cookieParser());
