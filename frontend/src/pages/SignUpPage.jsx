@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import { MessageSquare, User, Mail, Lock, EyeOff, Eye } from "lucide-react";
+import { MessageSquare, User, Mail, Lock, EyeOff, Eye, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import TypewriterText from "../components/TypewriterText";
 
 import AuthImagePattern from "../components/AuthImagePattern";
 import toast from "react-hot-toast";
@@ -19,9 +20,11 @@ const signUpPage = () => {
   const validateForm = () => {
     if (!formData.fullName.trim()) return toast.error("Full name is required.");
     if (!formData.email.trim()) return toast.error("Email is required.");
-    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
+    if (!/\S+@\S+\.\S+/.test(formData.email))
+      return toast.error("Invalid email format");
     if (!formData.password) return toast.error("Password is required.");
-    if (formData.password.length < 3) return toast.error("Password must be at least 3 characters");
+    if (formData.password.length < 3)
+      return toast.error("Password must be at least 3 characters");
 
     return true;
   };
@@ -45,7 +48,14 @@ const signUpPage = () => {
               </div>
               <h1 className="text-2xl front-bold mt-2">Create Account</h1>
               <p className="text-base-content/60">
-                Get started with your free account
+                <TypewriterText
+                  texts={[
+                    "Get started with your free account",
+                    "जहाँ हर बात हो दिल से।",
+                  ]}
+                  speed={80} // typing & deleting speed (lower = faster)
+                  pause={2000} // pause after full sentence before deleting
+                />
               </p>
             </div>
           </div>
@@ -108,21 +118,29 @@ const signUpPage = () => {
                     setFormData({ ...formData, password: e.target.value })
                   }
                 />
-                <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center" onClick={() => setShowPassword(!showPassword)}>
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   {showPassword ? (
-                    <EyeOff className="size-5 text-base-content/40"/>
+                    <EyeOff className="size-5 text-base-content/40" />
                   ) : (
                     <Eye className="size-5 text-base-content/40" />
                   )}
                 </button>
               </div>
             </div>
-                
+
             {/* Submit button */}
-            <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
+            <button
+              type="submit"
+              className="btn btn-primary w-full"
+              disabled={isSigningUp}
+            >
               {isSigningUp ? (
                 <>
-                <Loading2 className="size-5 animate-spin z-1"/>
+                  <Loader2 className="size-5 animate-spin z-1" />
                   Loading...
                 </>
               ) : (
@@ -135,7 +153,9 @@ const signUpPage = () => {
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
-              <Link to="/login" className="link link-primary">Sign in</Link>
+              <Link to="/login" className="link link-primary">
+                Sign in
+              </Link>
             </p>
           </div>
         </div>
@@ -143,8 +163,9 @@ const signUpPage = () => {
 
       {/* right side */}
       <AuthImagePattern
-      title="Join our community"
-      subtitle="Connect with friends, share moments, and stay in touch with you" />
+        title="Join our community"
+        subtitle="Where every word flows from the heart."
+      />
     </div>
   );
 };
