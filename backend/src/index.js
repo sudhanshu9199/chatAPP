@@ -11,7 +11,7 @@ import path from "path";
 
 
 dotenv.config();
-const port = process.env.PORT || 4003; // Set the port to the environment variable PORT or 4003
+const port = process.env.PORT; // Set the port to the environment variable PORT or 4003
 const_dirname = path.resolve();
 
 app.use(express.json({ extended: true, limit: '10mb'}));
