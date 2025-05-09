@@ -42,8 +42,11 @@ frontend/
 │   │   ├── ChatContainer.jsx
 │   │   ├── NoChatSelected.jsx
 │   │   ├── Sidebar.jsx
+│   │   ├── ChatHeader.jsx
+│   │   ├── MessageInput.jsx
 │   │   └── skeletons/
 │   │       └── SidebarSkeleton.jsx
+│   │       └── MessageSkeleton.jsx
 │   ├── pages/
 │   │   ├── HomePage.jsx
 │   │   ├── LoginPage.jsx
@@ -120,6 +123,13 @@ setSelectedUser(user);
 - `SignUpPage.jsx`: Validates full name, email, password.
 - `ProfilePage.jsx`: Avatar upload, profile details, and account info section
 - `SettingsPage.jsx`: Theme selection with live preview and chat interface simulation.
+- `ChatContainer.jsx`: Displays chat messages with support for text and image messages.
+
+- `ChatHeader.jsx`: Shows selected user's info and online status.
+
+- `MessageInput.jsx`: Input field for sending text and image messages.
+
+- `MessageSkeleton.jsx`: Skeleton loaders for chat messages.
 
 ---
 
@@ -177,7 +187,6 @@ The app uses React Router to manage navigation:
 
 ---
 
-## ✨ Future Enhancements
 ## 🔧 Features Added
 
 ### ✅ UI and UX
@@ -186,7 +195,7 @@ The app uses React Router to manage navigation:
 - Fully responsive `Navbar` with conditional rendering for authenticated users.
 - Stylish forms with icons and togglable password visibility.
 - Sidebar with animated skeletons while loading users.
-- ChatContainer and NoChatSelected render conditionally.
+- **ChatContainer** and `NoChatSelected` render conditionally.
 - Fully responsive layout.
 
 
